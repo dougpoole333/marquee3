@@ -1,3 +1,5 @@
+
+
 require('isomorphic-fetch');
 const dotenv = require('dotenv');
 const Koa = require('koa');
@@ -6,12 +8,16 @@ const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
 const { verifyRequest } = require('@shopify/koa-shopify-auth');
 const session = require('koa-session');
 
+const Router = require('koa-router');
+const router = new Router();
+
 dotenv.config();
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
 
 const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY } = process.env;
 
@@ -34,6 +40,46 @@ app.prepare().then(() => {
   );
 
   server.use(verifyRequest());
+
+  router.put('/api/:object', async (ctx) => {
+    try {
+      const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-04/themes/" + ctx.params.object + "/assets.json", {
+        headers: {
+          "X-Shopify-Access-Token": ctx.cookies.get('accessToken'),
+        },
+      })
+      .then(response => response.json())
+      .then(json => {
+        return json;
+      });
+      ctx.body = {
+        status: 'success',
+        data: results
+      };
+    } catch (err) {
+      console.log(err)
+    }
+  })
+
+  router.get('/api/:object', async (ctx) => {
+    try {
+      const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-04/themes/" + ctx.params.object + "/assets.json", {
+        headers: {
+          "X-Shopify-Access-Token": ctx.cookies.get('accessToken'),
+        },
+      })
+      .then(response => response.json())
+      .then(json => {
+        return json;
+      });
+      ctx.body = {
+        status: 'success',
+        data: results
+      };
+    } catch (err) {
+      console.log(err)
+    }
+  })
 
   server.use(async (ctx) => {
     await handle(ctx.req, ctx.res);
