@@ -7,6 +7,7 @@ const next = require('next');
 const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
 const { verifyRequest } = require('@shopify/koa-shopify-auth');
 const session = require('koa-session');
+const axios = require('axios')
 
 const Router = require('koa-router');
 const router = new Router();
@@ -30,10 +31,11 @@ app.prepare().then(() => {
     createShopifyAuth({
       apiKey: SHOPIFY_API_KEY,
       secret: SHOPIFY_API_SECRET_KEY,
-      scopes: ['read_products'],
+      scopes: ['read_themes', 'write_themes'],
       afterAuth(ctx) {
         const { shop, accessToken } = ctx.session;
           ctx.cookies.set('shopOrigin', shop, { httpOnly: false });
+          ctx.cookies.set('accessToken', accessToken );
         ctx.redirect('/');
       },
     }),
@@ -41,11 +43,16 @@ app.prepare().then(() => {
 
   server.use(verifyRequest());
 
+
   router.put('/api/:object', async (ctx) => {
+    const body = JSON.stringify({ asset: {key: "sections/marquee3.liquid", value: "<div>MARQUEE SHIT 3</div>"} })
     try {
-      const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-04/themes/" + ctx.params.object + "/assets.json", {
+      const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-07/themes/" + ctx.params.object + "/assets.json", {
+        method: 'PUT',
+        body: body,
         headers: {
           "X-Shopify-Access-Token": ctx.cookies.get('accessToken'),
+          'Content-Type': 'application/json',
         },
       })
       .then(response => response.json())
@@ -61,25 +68,8 @@ app.prepare().then(() => {
     }
   })
 
-  router.get('/api/:object', async (ctx) => {
-    try {
-      const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-04/themes/" + ctx.params.object + "/assets.json", {
-        headers: {
-          "X-Shopify-Access-Token": ctx.cookies.get('accessToken'),
-        },
-      })
-      .then(response => response.json())
-      .then(json => {
-        return json;
-      });
-      ctx.body = {
-        status: 'success',
-        data: results
-      };
-    } catch (err) {
-      console.log(err)
-    }
-  })
+  server.use(router.routes());
+  server.use(router.allowedMethods());
 
   server.use(async (ctx) => {
     await handle(ctx.req, ctx.res);
