@@ -53009,7 +53009,7 @@ function (_App) {
         shopOrigin: js_cookie__WEBPACK_IMPORTED_MODULE_11___default.a.get("shopOrigin"),
         forceRedirect: true
       };
-      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("title", null, "Marquee3"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("meta", {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_5___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, null, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("title", null, "Marquee"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("meta", {
         charSet: "utf-8"
       })), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_shopify_app_bridge_react__WEBPACK_IMPORTED_MODULE_9__["Provider"], {
         config: config

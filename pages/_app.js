@@ -12,7 +12,7 @@ class MyApp extends App {
     return (
       <React.Fragment>
         <Head>
-          <title>Marquee3</title>
+          <title>Marquee</title>
           <meta charSet="utf-8" />
         </Head>
         <Provider config={config}>

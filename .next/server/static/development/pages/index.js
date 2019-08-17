@@ -134,10 +134,10 @@ function _defineProperty(obj, key, value) {
 
 /***/ }),
 
-/***/ "./pages/annotated-layout.js":
-/*!***********************************!*\
-  !*** ./pages/annotated-layout.js ***!
-  \***********************************/
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -151,93 +151,78 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
-class AnnotatedLayout extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
-  constructor(...args) {
-    super(...args);
+class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
+  constructor(props) {
+    super(props);
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "state", {
-      discount: '10%',
-      enabled: false
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "fetchThemes", async () => {
+      fetch("/themes", {
+        method: "GET"
+      }).then(response => response.json()).then(json => this.setState({
+        themes: json.data.themes
+      })).then(() => console.log(this.state.themes));
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleSubmit", async () => {
-      var fetchUrl = "/api/75193516141";
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleChange", event => {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "logInput", () => {
+      console.log(this.state.themeId);
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "sendRequest", async () => {
+      var fetchUrl = "/api/" + this.state.themeId;
       var method = "PUT";
       fetch(fetchUrl, {
         method: method
       }).then(response => response.json()).then(json => console.log(json));
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleChange", field => {
-      return value => this.setState({
-        [field]: value
-      });
-    });
+    this.state = {
+      inputThemeId: "",
+      themes: []
+    };
+  }
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleToggle", () => {
-      this.setState(({
-        enabled
-      }) => {
-        return {
-          enabled: !enabled
-        };
-      });
-    });
+  componentDidMount() {
+    this.fetchThemes();
   }
 
   render() {
-    const {
-      discount,
-      enabled
-    } = this.state;
-    const contentStatus = enabled ? 'Disable' : 'Enable';
-    const textStatus = enabled ? 'enabled' : 'disabled';
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Page"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Layout"].AnnotatedSection, {
-      title: "Default discount",
-      description: "Add a product to Sample App, it will automatically be discounted."
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Card"], {
-      sectioned: true
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Form"], {
-      onSubmit: this.handleSubmit
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["FormLayout"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextField"], {
-      value: discount,
-      onChange: this.handleChange('discount'),
-      label: "Discount percentage",
-      type: "discount"
-    }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Stack"], {
-      distribution: "trailing"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Button"], {
-      primary: true,
-      submit: true
-    }, "Save")))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Layout"].AnnotatedSection, {
-      title: "Price updates",
-      description: "Temporarily disable all Sample App price updates"
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["SettingToggle"], {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Page"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["EmptyState"], {
+      heading: "Add the Marquee section to your theme",
       action: {
-        content: contentStatus,
-        onAction: this.handleToggle
+        content: 'Add',
+        onAction: () => this.sendRequest()
       },
-      enabled: enabled
-    }, "This setting is", ' ', react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextStyle"], {
-      variation: "strong"
-    }, textStatus), "."))));
+      image: img
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, this.state.themes ? this.state.themes.map(el => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, el.name, ": ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, el.id))) : null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Enter the ID of the Theme where you want to add Marquee"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
+      type: "text",
+      name: "themeId",
+      value: this.state.themeId,
+      onChange: this.handleChange
+    }))));
   }
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (AnnotatedLayout);
+/* harmony default export */ __webpack_exports__["default"] = (Index);
 
 /***/ }),
 
 /***/ 3:
-/*!*****************************************!*\
-  !*** multi ./pages/annotated-layout.js ***!
-  \*****************************************/
+/*!******************************!*\
+  !*** multi ./pages/index.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/dpoole/DEV/marquee3/pages/annotated-layout.js */"./pages/annotated-layout.js");
+module.exports = __webpack_require__(/*! /Users/dpoole/DEV/marquee3/pages/index.js */"./pages/index.js");
 
 
 /***/ }),
@@ -276,4 +261,4 @@ module.exports = require("react");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=annotated-layout.js.map
+//# sourceMappingURL=index.js.map

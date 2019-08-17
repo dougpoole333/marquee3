@@ -48,11 +48,34 @@ app.prepare().then(() => {
 
   //PUT route for creating liquid file
   router.put('/api/:object', async (ctx) => {
-    const body = JSON.stringify({ asset: {key: "sections/marquee3.liquid", value: marquee_content} })
+    const body = JSON.stringify({ asset: {key: "sections/marquee.liquid", value: marquee_content} })
     try {
       const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-07/themes/" + ctx.params.object + "/assets.json", {
         method: 'PUT',
         body: body,
+        headers: {
+          "X-Shopify-Access-Token": ctx.cookies.get('accessToken'),
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(json => {
+        return json;
+      });
+      ctx.body = {
+        status: 'success',
+        data: results
+      };
+    } catch (err) {
+      console.log(err)
+    }
+  })
+
+  //Get route to access list of themes
+  router.get('/themes', async (ctx) => {
+    try {
+      const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-07/themes.json", {
+        method: 'GET',
         headers: {
           "X-Shopify-Access-Token": ctx.cookies.get('accessToken'),
           'Content-Type': 'application/json',

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/annotated-layout.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/index.js"],{
 
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/object/create.js":
 /*!**********************************************************************!*\
@@ -43040,21 +43040,21 @@ module.exports = toNumber;
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fannotated-layout&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Fannotated-layout.js!./":
-/*!*********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fannotated-layout&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Fannotated-layout.js ***!
-  \*********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js!./":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js ***!
+  \******************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/annotated-layout", function() {
-      var page = __webpack_require__(/*! ./pages/annotated-layout.js */ "./pages/annotated-layout.js")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/", function() {
+      var page = __webpack_require__(/*! ./pages/index.js */ "./pages/index.js")
       if(true) {
-        module.hot.accept(/*! ./pages/annotated-layout.js */ "./pages/annotated-layout.js", function() {
-          if(!next.router.components["/annotated-layout"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/annotated-layout.js */ "./pages/annotated-layout.js")
-          next.router.update("/annotated-layout", updatedPage.default || updatedPage)
+        module.hot.accept(/*! ./pages/index.js */ "./pages/index.js", function() {
+          if(!next.router.components["/"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/index.js */ "./pages/index.js")
+          next.router.update("/", updatedPage.default || updatedPage)
         })
       }
       return { page: page.default || page }
@@ -47004,10 +47004,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./pages/annotated-layout.js":
-/*!***********************************!*\
-  !*** ./pages/annotated-layout.js ***!
-  \***********************************/
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -47037,41 +47037,68 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
-var AnnotatedLayout =
+var Index =
 /*#__PURE__*/
 function (_React$Component) {
-  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__["default"])(AnnotatedLayout, _React$Component);
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_7__["default"])(Index, _React$Component);
 
-  function AnnotatedLayout() {
-    var _getPrototypeOf2;
-
+  function Index(props) {
     var _this;
 
-    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__["default"])(this, AnnotatedLayout);
+    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__["default"])(this, Index);
 
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
+    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(Index).call(this, props));
 
-    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, (_getPrototypeOf2 = Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(AnnotatedLayout)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "state", {
-      discount: '10%',
-      enabled: false
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "handleSubmit",
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "fetchThemes",
     /*#__PURE__*/
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
     /*#__PURE__*/
     _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var fetchUrl, method;
       return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              fetchUrl = "/api/75193516141";
+              fetch("/themes", {
+                method: "GET"
+              }).then(function (response) {
+                return response.json();
+              }).then(function (json) {
+                return _this.setState({
+                  themes: json.data.themes
+                });
+              }).then(function () {
+                return console.log(_this.state.themes);
+              });
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })));
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "handleChange", function (event) {
+      _this.setState(Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])({}, event.target.name, event.target.value));
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "logInput", function () {
+      console.log(_this.state.themeId);
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "sendRequest",
+    /*#__PURE__*/
+    Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+    /*#__PURE__*/
+    _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var fetchUrl, method;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              fetchUrl = "/api/" + _this.state.themeId;
               method = "PUT";
               fetch(fetchUrl, {
                 method: method
@@ -47083,85 +47110,64 @@ function (_React$Component) {
 
             case 3:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     })));
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "handleChange", function (field) {
-      return function (value) {
-        return _this.setState(Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])({}, field, value));
-      };
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "handleToggle", function () {
-      _this.setState(function (_ref2) {
-        var enabled = _ref2.enabled;
-        return {
-          enabled: !enabled
-        };
-      });
-    });
-
+    _this.state = {
+      inputThemeId: "",
+      themes: []
+    };
     return _this;
   }
 
-  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(AnnotatedLayout, [{
+  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(Index, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchThemes();
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this$state = this.state,
-          discount = _this$state.discount,
-          enabled = _this$state.enabled;
-      var contentStatus = enabled ? 'Disable' : 'Enable';
-      var textStatus = enabled ? 'enabled' : 'disabled';
-      return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Page"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Layout"].AnnotatedSection, {
-        title: "Default discount",
-        description: "Add a product to Sample App, it will automatically be discounted."
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Card"], {
-        sectioned: true
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Form"], {
-        onSubmit: this.handleSubmit
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["FormLayout"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextField"], {
-        value: discount,
-        onChange: this.handleChange('discount'),
-        label: "Discount percentage",
-        type: "discount"
-      }), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Stack"], {
-        distribution: "trailing"
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Button"], {
-        primary: true,
-        submit: true
-      }, "Save")))))), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Layout"].AnnotatedSection, {
-        title: "Price updates",
-        description: "Temporarily disable all Sample App price updates"
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["SettingToggle"], {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Page"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["EmptyState"], {
+        heading: "Add the Marquee section to your theme",
         action: {
-          content: contentStatus,
-          onAction: this.handleToggle
+          content: 'Add',
+          onAction: function onAction() {
+            return _this2.sendRequest();
+          }
         },
-        enabled: enabled
-      }, "This setting is", ' ', react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextStyle"], {
-        variation: "strong"
-      }, textStatus), "."))));
+        image: img
+      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("ul", null, this.state.themes ? this.state.themes.map(function (el) {
+        return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("li", null, el.name, ": ", react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("strong", null, el.id));
+      }) : null), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", null, "Enter the ID of the Theme where you want to add Marquee"), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("input", {
+        type: "text",
+        name: "themeId",
+        value: this.state.themeId,
+        onChange: this.handleChange
+      }))));
     }
   }]);
 
-  return AnnotatedLayout;
+  return Index;
 }(react__WEBPACK_IMPORTED_MODULE_9___default.a.Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (AnnotatedLayout);
+/* harmony default export */ __webpack_exports__["default"] = (Index);
 
 /***/ }),
 
 /***/ 1:
-/*!*************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fannotated-layout&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Fannotated-layout.js ***!
-  \*************************************************************************************************************************************************/
+/*!**********************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js ***!
+  \**********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fannotated-layout&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Fannotated-layout.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fannotated-layout&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Fannotated-layout.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js!./");
 
 
 /***/ }),
@@ -47178,4 +47184,4 @@ module.exports = dll_01f9a3fa864a7b7414d8;
 /***/ })
 
 },[[1,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=annotated-layout.js.map
+//# sourceMappingURL=index.js.map
