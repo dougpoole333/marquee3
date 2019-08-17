@@ -1,17 +1,19 @@
-import { EmptyState, Layout, Page } from '@shopify/polaris';
+import { EmptyState, Layout, Page, Select } from '@shopify/polaris';
 const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
 class Index extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      inputThemeId: "",
+      selected: '',
       themes: []
     };
   }
+
   componentDidMount(){
-    this.fetchThemes();
+    this.getThemes();
   }
+
   render() {
     return (
       <Page>
@@ -20,20 +22,15 @@ class Index extends React.Component {
             heading="Add the Marquee section to your theme"
             action={{
               content: 'Add',
-              onAction: () => this.sendRequest()
+              onAction: () => this.assetUpdateRequest()
             }}
-            image={img}
           >
-            <ul>
-              {this.state.themes ? this.state.themes.map( el => <li>{el.name}: <strong>{el.id}</strong></li>) : null}
-            </ul>
-            <p>Enter the ID of the Theme where you want to add Marquee</p>
-            <input
-              type="text"
-              name="themeId"
-              value={this.state.themeId}
-              onChange={this.handleChange} />
-
+            <Select
+              options = {this.state.themes ? this.state.themes.map(el => {return{label: `${el.name}`, value:`${el.id}`}}) : null}
+              onChange={this.handleChange}
+              value={this.state.selected}
+              placeholder = "select a theme"
+               />
           </EmptyState>
         </Layout>
       </Page>
@@ -41,22 +38,18 @@ class Index extends React.Component {
   };
 
 
-  fetchThemes = async () => {
+  getThemes = async () => {
     fetch("/themes", { method: "GET"})
     .then(response => response.json())
     .then(json => this.setState({themes: json.data.themes}))
-    .then(() => console.log(this.state.themes))
-  };
-  handleChange = (event) => {
-    this.setState({ [event.target.name] : event.target.value });
   };
 
-  logInput = () => {
-    console.log(this.state.themeId)
-  }
+  handleChange = (newValue) => {
+    this.setState({selected: newValue});
+  };
 
-  sendRequest = async () => {
-    var fetchUrl = "/api/" + this.state.themeId; 
+  assetUpdateRequest = async () => {
+    var fetchUrl = "/api/" + this.state.selected; 
     var method = "PUT";
     fetch(fetchUrl, { method: method })
     .then(response => response.json())

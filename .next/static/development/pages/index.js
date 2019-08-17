@@ -47051,7 +47051,7 @@ function (_React$Component) {
 
     _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_4__["default"])(this, Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_5__["default"])(Index).call(this, props));
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "fetchThemes",
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "getThemes",
     /*#__PURE__*/
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
     /*#__PURE__*/
@@ -47068,8 +47068,6 @@ function (_React$Component) {
                 return _this.setState({
                   themes: json.data.themes
                 });
-              }).then(function () {
-                return console.log(_this.state.themes);
               });
 
             case 1:
@@ -47080,15 +47078,13 @@ function (_React$Component) {
       }, _callee);
     })));
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "handleChange", function (event) {
-      _this.setState(Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])({}, event.target.name, event.target.value));
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "handleChange", function (newValue) {
+      _this.setState({
+        selected: newValue
+      });
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "logInput", function () {
-      console.log(_this.state.themeId);
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "sendRequest",
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_8__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_6__["default"])(_this), "assetUpdateRequest",
     /*#__PURE__*/
     Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
     /*#__PURE__*/
@@ -47098,7 +47094,7 @@ function (_React$Component) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              fetchUrl = "/api/" + _this.state.themeId;
+              fetchUrl = "/api/" + _this.state.selected;
               method = "PUT";
               fetch(fetchUrl, {
                 method: method
@@ -47117,7 +47113,7 @@ function (_React$Component) {
     })));
 
     _this.state = {
-      inputThemeId: "",
+      selected: '',
       themes: []
     };
     return _this;
@@ -47126,7 +47122,7 @@ function (_React$Component) {
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__["default"])(Index, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.fetchThemes();
+      this.getThemes();
     }
   }, {
     key: "render",
@@ -47138,17 +47134,19 @@ function (_React$Component) {
         action: {
           content: 'Add',
           onAction: function onAction() {
-            return _this2.sendRequest();
+            return _this2.assetUpdateRequest();
           }
-        },
-        image: img
-      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("ul", null, this.state.themes ? this.state.themes.map(function (el) {
-        return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("li", null, el.name, ": ", react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("strong", null, el.id));
-      }) : null), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("p", null, "Enter the ID of the Theme where you want to add Marquee"), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("input", {
-        type: "text",
-        name: "themeId",
-        value: this.state.themeId,
-        onChange: this.handleChange
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["Select"], {
+        options: this.state.themes ? this.state.themes.map(function (el) {
+          return {
+            label: "".concat(el.name),
+            value: "".concat(el.id)
+          };
+        }) : null,
+        onChange: this.handleChange,
+        value: this.state.selected,
+        placeholder: "select a theme"
       }))));
     }
   }]);

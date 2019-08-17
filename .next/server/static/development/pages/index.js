@@ -157,26 +157,22 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
   constructor(props) {
     super(props);
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "fetchThemes", async () => {
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "getThemes", async () => {
       fetch("/themes", {
         method: "GET"
       }).then(response => response.json()).then(json => this.setState({
         themes: json.data.themes
-      })).then(() => console.log(this.state.themes));
+      }));
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleChange", event => {
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleChange", newValue => {
       this.setState({
-        [event.target.name]: event.target.value
+        selected: newValue
       });
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "logInput", () => {
-      console.log(this.state.themeId);
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "sendRequest", async () => {
-      var fetchUrl = "/api/" + this.state.themeId;
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "assetUpdateRequest", async () => {
+      var fetchUrl = "/api/" + this.state.selected;
       var method = "PUT";
       fetch(fetchUrl, {
         method: method
@@ -184,13 +180,13 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
     });
 
     this.state = {
-      inputThemeId: "",
+      selected: '',
       themes: []
     };
   }
 
   componentDidMount() {
-    this.fetchThemes();
+    this.getThemes();
   }
 
   render() {
@@ -198,14 +194,18 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       heading: "Add the Marquee section to your theme",
       action: {
         content: 'Add',
-        onAction: () => this.sendRequest()
-      },
-      image: img
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", null, this.state.themes ? this.state.themes.map(el => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, el.name, ": ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("strong", null, el.id))) : null), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Enter the ID of the Theme where you want to add Marquee"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
-      type: "text",
-      name: "themeId",
-      value: this.state.themeId,
-      onChange: this.handleChange
+        onAction: () => this.assetUpdateRequest()
+      }
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+      options: this.state.themes ? this.state.themes.map(el => {
+        return {
+          label: `${el.name}`,
+          value: `${el.id}`
+        };
+      }) : null,
+      onChange: this.handleChange,
+      value: this.state.selected,
+      placeholder: "select a theme"
     }))));
   }
 
