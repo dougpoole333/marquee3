@@ -47071,7 +47071,7 @@ function (_React$Component) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              fetchUrl = "/api/75057168493";
+              fetchUrl = "/api/75193516141";
               method = "PUT";
               fetch(fetchUrl, {
                 method: method
@@ -47079,28 +47079,7 @@ function (_React$Component) {
                 return response.json();
               }).then(function (json) {
                 return console.log(json);
-              }); // var session_url = 'https://bismuth-dev.myshopify.com/admin/api/2019-07/themes/75057168493/assets.json';
-              // var username = '35f5151b48c7fb8fb8c9fe4185fb7c25';
-              // var password = '122b9134735957626720501cf4755623';
-              // var basicAuth = 'Basic ' + btoa(username + ':' + password);
-              // var body = { asset: {key: "sections/marquee3.liquid", value: "<div>MARQUEE SHIT 3</div>"} }
-              // axios({
-              //   method: 'put',
-              //   url: session_url,
-              //   auth: { username: username, password: password },
-              //   data: body,
-              //   headers: { 'Authorization': + basicAuth }
-              // }).then(function(response) {
-              //   console.log('Authenticated');
-              //   console.log(response)
-              // }).catch(function(error) {
-              //   console.log('Error on Authentication');
-              // });
-              // const response = await fetch('https://bismuth-dev.myshopify.com/admin/api/2019-07/themes/75057168493/assets.json', {
-              //   method: 'PUT',
-              //   headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': 'PUT', 'Access-Control-Allow-Origin':  'https://30e2e004.ngrok.io', 'Access-Control-Allow-Headers': ['Content-Type', 'Authorization'] },
-              //   body: JSON.stringify({ asset: {key: "templates/index.liquid", value: "test"} })
-              // })
+              });
 
             case 3:
             case "end":
@@ -47165,17 +47144,7 @@ function (_React$Component) {
       }, "This setting is", ' ', react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_10__["TextStyle"], {
         variation: "strong"
       }, textStatus), "."))));
-    } //Access-Control-Allow-Origin:  http://127.0.0.1:3000
-    // Access-Control-Allow-Methods: POST
-    // Access-Control-Allow-Headers: Content-Type, Authorization
-    // handleSubmit = async () => {
-    //   const response = await fetch('https://bismuth-dev.myshopify.com/admin/api/2019-07/themes/75057168493/assets.json', {
-    //     method: 'PUT',
-    //     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': 'PUT', 'Access-Control-Allow-Origin':  'https://30e2e004.ngrok.io', 'Access-Control-Allow-Headers': ['Content-Type', 'Authorization'] },
-    //     body: JSON.stringify({ asset: {key: "templates/index.liquid", value: "test"} })
-    //   })
-    // };
-
+    }
   }]);
 
   return AnnotatedLayout;
@@ -47185,7 +47154,7 @@ function (_React$Component) {
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!*************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fannotated-layout&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Fannotated-layout.js ***!
   \*************************************************************************************************************************************************/
@@ -47208,5 +47177,5 @@ module.exports = dll_01f9a3fa864a7b7414d8;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=annotated-layout.js.map

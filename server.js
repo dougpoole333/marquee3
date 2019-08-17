@@ -12,6 +12,8 @@ const axios = require('axios')
 const Router = require('koa-router');
 const router = new Router();
 
+const marquee_content = require("./marquee-content.js").content
+
 dotenv.config();
 
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -20,13 +22,14 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 
-const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY } = process.env;
+const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY} = process.env;
 
 app.prepare().then(() => {
   const server = new Koa();
   server.use(session(server));
   server.keys = [SHOPIFY_API_SECRET_KEY];
 
+  //Auth for app
   server.use(
     createShopifyAuth({
       apiKey: SHOPIFY_API_KEY,
@@ -43,9 +46,9 @@ app.prepare().then(() => {
 
   server.use(verifyRequest());
 
-
+  //PUT route for creating liquid file
   router.put('/api/:object', async (ctx) => {
-    const body = JSON.stringify({ asset: {key: "sections/marquee3.liquid", value: "<div>MARQUEE SHIT 3</div>"} })
+    const body = JSON.stringify({ asset: {key: "sections/marquee3.liquid", value: marquee_content} })
     try {
       const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-07/themes/" + ctx.params.object + "/assets.json", {
         method: 'PUT',

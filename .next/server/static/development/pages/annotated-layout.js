@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -162,32 +162,11 @@ class AnnotatedLayout extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compo
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleSubmit", async () => {
-      var fetchUrl = "/api/75057168493";
+      var fetchUrl = "/api/75193516141";
       var method = "PUT";
       fetch(fetchUrl, {
         method: method
-      }).then(response => response.json()).then(json => console.log(json)); // var session_url = 'https://bismuth-dev.myshopify.com/admin/api/2019-07/themes/75057168493/assets.json';
-      // var username = '35f5151b48c7fb8fb8c9fe4185fb7c25';
-      // var password = '122b9134735957626720501cf4755623';
-      // var basicAuth = 'Basic ' + btoa(username + ':' + password);
-      // var body = { asset: {key: "sections/marquee3.liquid", value: "<div>MARQUEE SHIT 3</div>"} }
-      // axios({
-      //   method: 'put',
-      //   url: session_url,
-      //   auth: { username: username, password: password },
-      //   data: body,
-      //   headers: { 'Authorization': + basicAuth }
-      // }).then(function(response) {
-      //   console.log('Authenticated');
-      //   console.log(response)
-      // }).catch(function(error) {
-      //   console.log('Error on Authentication');
-      // });
-      // const response = await fetch('https://bismuth-dev.myshopify.com/admin/api/2019-07/themes/75057168493/assets.json', {
-      //   method: 'PUT',
-      //   headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': 'PUT', 'Access-Control-Allow-Origin':  'https://30e2e004.ngrok.io', 'Access-Control-Allow-Headers': ['Content-Type', 'Authorization'] },
-      //   body: JSON.stringify({ asset: {key: "templates/index.liquid", value: "test"} })
-      // })
+      }).then(response => response.json()).then(json => console.log(json));
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "handleChange", field => {
@@ -243,17 +222,7 @@ class AnnotatedLayout extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compo
     }, "This setting is", ' ', react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["TextStyle"], {
       variation: "strong"
     }, textStatus), "."))));
-  } //Access-Control-Allow-Origin:  http://127.0.0.1:3000
-  // Access-Control-Allow-Methods: POST
-  // Access-Control-Allow-Headers: Content-Type, Authorization
-  // handleSubmit = async () => {
-  //   const response = await fetch('https://bismuth-dev.myshopify.com/admin/api/2019-07/themes/75057168493/assets.json', {
-  //     method: 'PUT',
-  //     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': 'PUT', 'Access-Control-Allow-Origin':  'https://30e2e004.ngrok.io', 'Access-Control-Allow-Headers': ['Content-Type', 'Authorization'] },
-  //     body: JSON.stringify({ asset: {key: "templates/index.liquid", value: "test"} })
-  //   })
-  // };
-
+  }
 
 }
 
@@ -261,7 +230,7 @@ class AnnotatedLayout extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compo
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!*****************************************!*\
   !*** multi ./pages/annotated-layout.js ***!
   \*****************************************/
