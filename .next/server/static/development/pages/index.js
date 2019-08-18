@@ -148,6 +148,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @shopify/polaris */ "@shopify/polaris");
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -161,7 +164,8 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       fetch("/themes", {
         method: "GET"
       }).then(response => response.json()).then(json => this.setState({
-        themes: json.data.themes
+        themes: json.data.themes,
+        loading: false
       }));
     });
 
@@ -171,17 +175,81 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       });
     });
 
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "renderRedirect", () => {
+      if (this.state.redirect && !this.state.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["EmptyState"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+          target: "_blank",
+          style: {
+            textDecoration: 'none'
+          },
+          href: 'http://' + js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('shopOrigin') + `/admin/themes/${this.state.selected}/editor`
+        }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          primary: true
+        }, "OPEN CUSTOMIZER")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          primary: true,
+          onClick: this.triggerReset
+        }, "ADD MARQUEE TO ANOTHER THEME"));
+      }
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "renderSpinner", () => {
+      if (this.state.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["EmptyState"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Spinner"], null));
+      }
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "triggerReset", () => {
+      this.setState({
+        selecting: true,
+        selected: '',
+        redirect: false
+      });
+    });
+
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "renderSelector", () => {
+      if (this.state.selecting && !this.state.loading) {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["EmptyState"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Select"], {
+          options: this.state.themes ? this.state.themes.map(el => {
+            return {
+              label: `${el.name}`,
+              value: `${el.id}`
+            };
+          }) : null,
+          onChange: this.handleChange,
+          value: this.state.selected,
+          placeholder: "select a theme"
+        }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Button"], {
+          primary: true,
+          onClick: this.assetUpdateRequest
+        }, "Add"));
+      }
+    });
+
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "assetUpdateRequest", async () => {
+      this.state.selected ? this.setState({
+        loading: true
+      }) : null;
       var fetchUrl = "/api/" + this.state.selected;
       var method = "PUT";
       fetch(fetchUrl, {
         method: method
-      }).then(response => response.json()).then(json => console.log(json));
+      }).then(response => response.json()).then(json => {
+        if (json.status === 'success') {
+          this.setState({
+            redirect: true,
+            selecting: false,
+            loading: false
+          });
+        }
+      });
     });
 
     this.state = {
+      selecting: true,
+      loading: true,
       selected: '',
-      themes: []
+      themes: [],
+      redirect: false
     };
   }
 
@@ -190,23 +258,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
   }
 
   render() {
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Page"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Layout"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["EmptyState"], {
-      heading: "Add the Marquee section to your theme",
-      action: {
-        content: 'Add',
-        onAction: () => this.assetUpdateRequest()
-      }
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Select"], {
-      options: this.state.themes ? this.state.themes.map(el => {
-        return {
-          label: `${el.name}`,
-          value: `${el.id}`
-        };
-      }) : null,
-      onChange: this.handleChange,
-      value: this.state.selected,
-      placeholder: "select a theme"
-    }))));
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Page"], null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Layout"], null, this.renderSelector(), this.renderRedirect(), this.renderSpinner()));
   }
 
 }
@@ -246,6 +298,17 @@ module.exports = require("@shopify/polaris");
 /***/ (function(module, exports) {
 
 module.exports = require("core-js/library/fn/object/define-property");
+
+/***/ }),
+
+/***/ "js-cookie":
+/*!****************************!*\
+  !*** external "js-cookie" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("js-cookie");
 
 /***/ }),
 

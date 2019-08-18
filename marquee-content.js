@@ -1,4 +1,5 @@
 const marquee_content = `
+
 <!-- Section: marquee.liquid -->
 
 {% if section.settings.marquee_url != blank %}
@@ -38,6 +39,11 @@ const marquee_content = `
 {% endif %}
 
 <style>
+  .marquee-wrapper{
+  	position: absolute;
+    left: 0;
+    width: 100vw;
+  }
 .marquee-line {
   overflow: hidden;
   white-space: nowrap;
@@ -96,13 +102,15 @@ populateMarquee = (marquee) => {
   $('#shopify-section-' + marquee.id).find(".marquee-line").each(function(){
     let marqueeA = $(this).find('.marquee-a');
     let marqueeB = $(this).find('.marquee-b');
-    let repeatFactor = Math.ceil($(window).width()/marqueeA.find(".marquee-unit").width()); //times the marquee unit should repeat to fill the window width
-    let marqueeLength = marqueeA.children().length; //times the marquee unit currently repeats
+    let repeatFactor = Math.ceil($(window).width()/marqueeA.find(".marquee-unit").width());
+    console.log(repeatFactor)//times the marquee unit should repeat to fill the window width
+    let marqueeLength = marqueeA.children().length;
+    console.log(marqueeLength)//times the marquee unit currently repeats
 
     addUnits = () => {
       for(let i = 0; i < repeatFactor - marqueeLength; i++){
-        marqueeA.find('.marquee-unit').first().clone().appendTo('#shopify-section-' + marquee.id + '.marquee-a');
-        marqueeB.find('.marquee-unit').first().clone().appendTo('#shopify-section-' + marquee.id + '.marquee-');
+        marqueeA.find('.marquee-unit').first().clone().appendTo('#shopify-section-' + marquee.id + ' .marquee-a');
+        marqueeB.find('.marquee-unit').first().clone().appendTo('#shopify-section-' + marquee.id + ' .marquee-b');
       }
     }
 
@@ -211,6 +219,7 @@ $(document).ready(function(){
     ]
   }
 {% endschema %}
+
 
 `  
 module.exports.content = marquee_content;
