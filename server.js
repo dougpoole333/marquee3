@@ -1,5 +1,3 @@
-
-
 require('isomorphic-fetch');
 const dotenv = require('dotenv');
 const Koa = require('koa');
@@ -7,12 +5,9 @@ const next = require('next');
 const { default: createShopifyAuth } = require('@shopify/koa-shopify-auth');
 const { verifyRequest } = require('@shopify/koa-shopify-auth');
 const session = require('koa-session');
-const axios = require('axios')
 
 const Router = require('koa-router');
 const router = new Router();
-
-const marquee_content = require("./marquee-content.js").content
 
 dotenv.config();
 
@@ -48,9 +43,11 @@ app.prepare().then(() => {
 
   //PUT route for creating liquid file
   router.put('/api/:object', async (ctx) => {
+    const marquee_content = require("./marquee-content.js").content
     const body = JSON.stringify({ asset: {key: "sections/marquee.liquid", value: marquee_content} })
+    const url = `https://${ctx.cookies.get('shopOrigin')}/admin/api/2019-07/themes/${ctx.params.object}/assets.json`
     try {
-      const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-07/themes/" + ctx.params.object + "/assets.json", {
+      const results = await fetch( url, {
         method: 'PUT',
         body: body,
         headers: {
@@ -73,8 +70,9 @@ app.prepare().then(() => {
 
   //Get route to access list of themes
   router.get('/themes', async (ctx) => {
+    const url = `https://${ctx.cookies.get('shopOrigin')}/admin/api/2019-07/themes.json`
     try {
-      const results = await fetch("https://" + ctx.cookies.get('shopOrigin') + "/admin/api/2019-07/themes.json", {
+      const results = await fetch( url, {
         method: 'GET',
         headers: {
           "X-Shopify-Access-Token": ctx.cookies.get('accessToken'),

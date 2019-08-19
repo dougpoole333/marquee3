@@ -1,8 +1,5 @@
 import { EmptyState, Spinner, Layout, Page, Select, Button } from '@shopify/polaris';
 import Cookies from 'js-cookie';
-const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
-
-
 
 class Index extends React.Component {
   constructor(props){
@@ -96,7 +93,7 @@ class Index extends React.Component {
 
   assetUpdateRequest = async () => {
     this.state.selected ? this.setState({loading: true}) : null
-    var fetchUrl = "/api/" + this.state.selected; 
+    var fetchUrl = "/api/" + this.state.selected;
     var method = "PUT";
     fetch(fetchUrl, { method: method })
     .then(response => response.json())

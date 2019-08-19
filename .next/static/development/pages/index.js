@@ -43218,10 +43218,10 @@ module.exports = toNumber;
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js!./":
-/*!******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js ***!
-  \******************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fuserone%2FDocuments%2FApp-dev%2Fmarquee3%2Fpages%2Findex.js!./":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fuserone%2FDocuments%2FApp-dev%2Fmarquee3%2Fpages%2Findex.js ***!
+  \***********************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -47218,7 +47218,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
 var Index =
 /*#__PURE__*/
@@ -47383,13 +47382,13 @@ function (_React$Component) {
 /***/ }),
 
 /***/ 1:
-/*!**********************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js ***!
-  \**********************************************************************************************************************/
+/*!***************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fuserone%2FDocuments%2FApp-dev%2Fmarquee3%2Fpages%2Findex.js ***!
+  \***************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fdpoole%2FDEV%2Fmarquee3%2Fpages%2Findex.js!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Fuserone%2FDocuments%2FApp-dev%2Fmarquee3%2Fpages%2Findex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Fuserone%2FDocuments%2FApp-dev%2Fmarquee3%2Fpages%2Findex.js!./");
 
 
 /***/ }),

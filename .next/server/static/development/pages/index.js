@@ -154,7 +154,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const img = 'https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg';
 
 class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
   constructor(props) {
@@ -274,7 +273,7 @@ class Index extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/dpoole/DEV/marquee3/pages/index.js */"./pages/index.js");
+module.exports = __webpack_require__(/*! /Users/userone/Documents/App-dev/marquee3/pages/index.js */"./pages/index.js");
 
 
 /***/ }),
