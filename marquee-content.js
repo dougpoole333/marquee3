@@ -10,7 +10,7 @@ const marquee_content = `
   <div
     id='marquee-{{ section_id }}'
     class="marquee-wrapper {{section.settings.add_class}}"
-    style="width: 100vw;"
+    style={% if section_settings.contain == 'true' %}"width: 100%; overflow: hidden" {%else%} "width: 100vw;"{%endif%}
     data-marquee-settings='{{ section.settings | json }}'>
 
     {% for block in section_blocks %}
@@ -41,10 +41,8 @@ const marquee_content = `
   .marquee-wrapper{
   	position: relative;
     left: 0;
-    width: 100vw;
   }
 .marquee-line {
-  overflow: hidden;
   white-space: nowrap;
   text-transform: uppercase;
   letter-spacing: 0.15em;
@@ -56,7 +54,6 @@ const marquee_content = `
 
 .marquee-a, .marquee-b {
   display: inline-block;
-  overflow: hidden;
 }
 
 .marquee-unit {
@@ -151,6 +148,16 @@ $(document).ready(function(){
         "type": "url",
         "id": "marquee_url",
         "label": "Include a Link"
+      },
+      {
+        "type": "radio",
+        "id": "contain",
+        "label": "Full Width or Contained",
+		"options": [
+           { "value": "true", "label": "Contained" },
+           { "value": "false", "label": "Full Width" }
+         ],
+   		"default":   "true"
       }
     ],
     "blocks": [
