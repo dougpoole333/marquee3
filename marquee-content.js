@@ -82,7 +82,12 @@ const marquee_content = `
 </style>
 
 <script>
-$(document).ready(function(){
+document.addEventListener("DOMContentLoaded", function(){
+  if (!window.jQuery){
+  	let script = document.createElement('script');
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js";
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
   populateMarquee = (marquee) => {
     $('#shopify-section-' + marquee.id).find(".marquee-line").each(function(){
       let marqueeA = $(this).find('.marquee-a');
@@ -131,6 +136,7 @@ $(document).ready(function(){
   //re-init marquees on window resize
   $(window).resize(function(){
     initMarquee();
+    console.log("car")
   })
 })
 </script>
