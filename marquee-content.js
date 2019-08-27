@@ -6,31 +6,29 @@ const marquee_content = `
 {% endif %}
   {% assign section_settings = section.settings %}
   {% assign section_id = section.id %}
-  {% assign section_blocks = section.blocks %}
   <div
     id='marquee-{{ section_id }}'
     class="marquee-wrapper {{section.settings.add_class}}"
     style={% if section_settings.contain == 'true' %}"width: 100%; overflow: hidden" {%else%} "width: 100vw;"{%endif%}
     data-marquee-settings='{{ section.settings | json }}'>
 
-    {% for block in section_blocks %}
-      <div id='section-{{section_id}}--block-{{forloop.index}}' data-block-speed="{{block.settings.marquee_speed}}" class="marquee-line bold font3" style="background:{{block.settings.marquee_color_bg}};color:{{block.settings.marquee_color_text}}; font-size: {{block.settings.marquee_font_size}}px;">
+      <div id='section-{{section_id}}' data-speed="{{section.settings.marquee_speed}}" class="marquee-line bold font3" style="background:{{section.settings.marquee_color_bg}};color:{{section.settings.marquee_color_text}}; font-size: {{section.settings.marquee_font_size}}px;">
         <div
           class="marquee-a"
           style="animation-name: marquee1; animation-timing-function: linear; animation-iteration-count: infinite;">
-            <div class="marquee-unit" style="margin: 0px {{block.settings.marquee_margin}}px;">
-              {{ block.settings.marquee_copy }}
+            <div class="marquee-unit" style="margin: 0px {{section.settings.marquee_margin}}px;">
+              {{ section.settings.marquee_copy }}
             </div>
         </div>
         <div
           class="marquee-b"
           style="animation-name: marquee2; animation-timing-function: linear; animation-iteration-count: infinite;">
-            <div class="marquee-unit" style="margin: 0px {{block.settings.marquee_margin}}px;">
-              {{ block.settings.marquee_copy }}
+            <div class="marquee-unit" style="margin: 0px {{section.settings.marquee_margin}}px;">
+              {{ section.settings.marquee_copy }}
             </div>
         </div>
       </div>
-    {% endfor %}
+
   </div>
 
 {% if section.settings.marquee_url != blank %}
@@ -94,14 +92,11 @@ document.addEventListener("DOMContentLoaded", function(){
       let marqueeB = $(this).find('.marquee-b');
       let repeatFactor = Math.ceil($(window).width()/marqueeA.find(".marquee-unit").width());
       let marqueeLength = marqueeA.children().length;
-      let blocksLength = {{section_blocks | json}}.length
 
       addUnits = () => {
         for(let i = 0; i < repeatFactor - marqueeLength; i++){
-          for(let j = 1 ; j <= blocksLength ; j++){
-          	$('#section-' + marquee.id + '--block-' + j + ' .marquee-a').find('.marquee-unit').first().clone().appendTo('#section-' + marquee.id + '--block-' + j + ' .marquee-a');
-          	$('#section-' + marquee.id + '--block-' + j + ' .marquee-b').find('.marquee-unit').first().clone().appendTo('#section-' + marquee.id + '--block-' + j + ' .marquee-b');
-          }
+          	$('#section-' + marquee.id + ' .marquee-a').find('.marquee-unit').first().clone().appendTo('#section-' + marquee.id + ' .marquee-a');
+          	$('#section-' + marquee.id + ' .marquee-b').find('.marquee-unit').first().clone().appendTo('#section-' + marquee.id + ' .marquee-b');
         }
       }
 
@@ -117,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function(){
   }
   setAnimationDuration = (marquee) => {
     $('#shopify-section-' + marquee.id).find(".marquee-line").each(function(){
-      let marqueeSpeed = 1 / $(this).attr("data-block-speed")
+      let marqueeSpeed = 1 / $(this).attr("data-speed")
       let windowWidth = $(window).width();
       let animationDuration = marqueeSpeed * windowWidth / 3
       $(this).find(".marquee-a").css({"animation-duration": animationDuration+'s', "animation-delay": '-' + animationDuration/2 + 's'})
@@ -136,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function(){
   //re-init marquees on window resize
   $(window).resize(function(){
     initMarquee();
-    console.log("car")
   })
 })
 </script>
@@ -145,6 +139,12 @@ document.addEventListener("DOMContentLoaded", function(){
   {
     "name": "Marquee",
     "settings": [
+	  {
+        "type": "textarea",
+        "id": "marquee_copy",
+        "label": "Text to Display",
+        "default": "Hello World"
+      },
       {
         "type": "text",
         "id": "add_class",
@@ -164,59 +164,45 @@ document.addEventListener("DOMContentLoaded", function(){
            { "value": "false", "label": "Full Width" }
          ],
    		"default":   "true"
+      },
+      {
+        "type": "range",
+        "id": "marquee_speed",
+        "label": "Speed",
+        "min": 4,
+        "max": 30,
+        "step": 2,
+        "default": 8
+      },
+      {
+        "type": "range",
+        "id": "marquee_font_size",
+        "label": "Font Size",
+        "min": 6,
+        "max": 60,
+        "step": 2,
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "marquee_margin",
+        "label": "Margin",
+        "min": 0,
+        "max": 60,
+        "step": 2,
+        "default": 20
+      },
+      {
+        "type": "color",
+        "id": "marquee_color_text",
+        "label": "Text Color"
+      },
+      {
+        "type": "color",
+        "id": "marquee_color_bg",
+        "label": "Background Color"
       }
     ],
-    "blocks": [
-        {
-          "name": "Marquee Line",
-          "type": "marquee_block",
-          "settings": [
-			{
-              "type": "textarea",
-              "id": "marquee_copy",
-              "label": "Text to Display",
-              "default": "Hello World"
-            },
-            {
-              "type": "range",
-              "id": "marquee_speed",
-              "label": "Speed",
-              "min": 4,
-              "max": 30,
-              "step": 2,
-              "default": 8
-            },
-            {
-              "type": "range",
-              "id": "marquee_font_size",
-              "label": "Font Size",
-              "min": 6,
-              "max": 60,
-              "step": 2,
-              "default": 20
-            },
-            {
-              "type": "range",
-              "id": "marquee_margin",
-              "label": "Margin",
-              "min": 0,
-              "max": 60,
-              "step": 2,
-              "default": 20
-            },
-            {
-              "type": "color",
-              "id": "marquee_color_text",
-              "label": "Text Color"
-            },
-            {
-              "type": "color",
-              "id": "marquee_color_bg",
-              "label": "Background Color"
-            }
-          ]
-        }
-      ],
     "presets": [
       {
         "name": "Marquee",
