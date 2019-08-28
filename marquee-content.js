@@ -1,6 +1,5 @@
 const marquee_content = `
 <!-- Section: marquee.liquid -->
-
 {% if section.settings.marquee_url != blank %}
   <a href={{section.settings.marquee_url}}>
 {% endif %}
