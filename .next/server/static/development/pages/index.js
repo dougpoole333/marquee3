@@ -450,7 +450,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @shopify/polaris */ "@shopify/polaris");
 /* harmony import */ var _shopify_polaris__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _walkthrough_info_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./walkthrough-info.js */ "./pages/walkthrough-info.js");
+/* harmony import */ var _walkthrough_info_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./walkthrough-info.js */ "./pages/walkthrough-info.js");
 
 
 
@@ -486,7 +486,7 @@ class Window extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Component {
       onSelect: this.handleTabChange
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_shopify_polaris__WEBPACK_IMPORTED_MODULE_2__["Card"].Section, {
       title: tabs[selected].header
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_walkthrough_info_js__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_walkthrough_info_js__WEBPACK_IMPORTED_MODULE_3__["default"], {
       field: tabs[selected].id
     }))));
   }
