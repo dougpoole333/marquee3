@@ -10,6 +10,8 @@ class WalkthroughInfo extends React.Component {
         return(
           <h1>THIS IS THE OTHER PAGES SECTION</h1>
         )
+      } else {
+        return (<h1> empty </h1>)
       }
   }
 }

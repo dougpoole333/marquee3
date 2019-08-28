@@ -15,7 +15,10 @@ class WalkthroughInfo extends React.Component {
         return(
           <h1>THIS IS THE OTHER PRODUCTS SECTION</h1>
         )
+      } else {
+        return (<h1> empty </h1>)
       }
+
   }
 }
 
