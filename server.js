@@ -115,8 +115,8 @@ app.prepare().then(() => {
   })
 
   //Get route to access list of themes
-  router.get('/themes/:object', async (ctx) => {
-    const url = `https://${ctx.params.object}/admin/api/2019-07/themes.json`
+  router.get('/themes', async (ctx) => {
+    const url = `https://${ctx.cookies.get('shopOrigin')}/admin/api/2019-07/themes.json`
     try {
       const results = await fetch( url, {
         method: 'GET',
