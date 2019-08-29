@@ -16,6 +16,21 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
+// firebase
+
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://marquee-by-bismuth-2eca6.firebaseio.com"
+});
+
+const db = admin.firestore();
+
+//
+
 
 const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY} = process.env;
 
@@ -34,12 +49,11 @@ app.prepare().then(() => {
         const { shop, accessToken } = ctx.session;
           ctx.cookies.set('shopOrigin', shop, { httpOnly: false });
           ctx.cookies.set('accessToken', accessToken );
+          console.log(shop)
         ctx.redirect('/');
       },
     }),
-  );
-
-  server.use(verifyRequest());
+  ).use(verifyRequest());
 
   //PUT route for creating liquid file
   router.put('/api/:object', async (ctx) => {
@@ -54,11 +68,43 @@ app.prepare().then(() => {
           "X-Shopify-Access-Token": ctx.cookies.get('accessToken'),
           'Content-Type': 'application/json',
         },
-      })
+      }
+    )
       .then(response => response.json())
       .then(json => {
         return json;
-      });
+      }).then( () => {
+        const store = ctx.cookies.get('shopOrigin').split('.')[0]
+        docRef = db.collection("stores").doc(store)
+        docRef.get().then(function(doc){
+            if (doc.exists) {
+              let newInstall = {
+                date: Date.now(),
+                themeID: ctx.params.object
+              }
+              let oldInstalls = doc.data().installs
+              const data = {
+                store: store,
+                installs: [...oldInstalls, newInstall]
+                }
+              return db.collection('stores').doc(store).set(data).then(() => {
+                console.log("written to database")
+              })
+            } else {
+              const data = {
+                store: store,
+                installs: [{
+                    date: Date.now(),
+                    themeID: ctx.params.object
+                  }]
+                }
+              return db.collection('stores').doc(store).set(data).then(() => {
+                console.log("written to database")
+                })
+              }
+          }
+      );
+    })
       ctx.body = {
         status: 'success',
         data: results
@@ -69,8 +115,8 @@ app.prepare().then(() => {
   })
 
   //Get route to access list of themes
-  router.get('/themes', async (ctx) => {
-    const url = `https://${ctx.cookies.get('shopOrigin')}/admin/api/2019-07/themes.json`
+  router.get('/themes/:object', async (ctx) => {
+    const url = `https://${ctx.params.object}/admin/api/2019-07/themes.json`
     try {
       const results = await fetch( url, {
         method: 'GET',
